@@ -44,25 +44,18 @@ def gene_to_pdb_purification(gene_list):
         residue_to_remove = []
         chain_to_remove = []
 
-        # checks hetero atoms
         for chain in model:
             for residue in chain:
                 if residue.id[0] != ' ':
                     residue_to_remove.append((chain.id, residue.id))
-            # checks chains
             if len(chain) == 0:
                 chain_to_remove.append(chain.id)
-
-        # removes hetero atoms
         for residue in residue_to_remove:
             model[residue[0]].detach_child(residue[1])
-
-        # removes chains
         for chain in chain_to_remove:
             print(f"chain: {chain}")
             model.detach_child(chain)
 
-        # to save changed model in pdb
         io.set_structure(model)
         io.save("model"+".pdb")
 
@@ -70,7 +63,6 @@ def gene_to_pdb_purification(gene_list):
             io.set_structure(chains)
             io.save(f"chain_{str(chains)[-2]}_{pdb_ids[0]}.pdb")
 
-        # delete chains according to user
         for chain in model.get_chains():
             print(f"Chain ID: {str(chain)[-2]}")
         user_chain_input = input("Enter chains you want to remove separate by (,): ")

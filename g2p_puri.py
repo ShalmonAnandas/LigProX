@@ -69,7 +69,10 @@ def gene_to_pdb_purification(gene_list):
         user_chain_input = input("Enter chains you want to remove separate by (,): ")
         user_input_list = user_chain_input.split(",")
 
-        if user_input_list > 0:
+        while "" in user_input_list:
+            user_input_list.remove("")
+
+        if len(user_input_list) > 0:
             for inputs in user_input_list:
                 model.detach_child(inputs)
 
@@ -77,4 +80,4 @@ def gene_to_pdb_purification(gene_list):
             io.save(f"model_{pdb_ids[0]}_without_chain{str(user_input_list)}.pdb")
         else:
             io.set_structure(model)
-            io.save(f"model_with_all_chains.pdb")
+            io.save(f"model_{pdb_ids[0]}_with_all_chains.pdb")

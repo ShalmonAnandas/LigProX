@@ -27,11 +27,14 @@ new_dir_path = os.path.join(os.getcwd(), date_time_str)
 os.mkdir(new_dir_path)
 source_dir = os.getcwd()
 dest_dir = new_dir_path
-for file_name in os.listdir(source_dir):
-    if file_name.endswith('.pdb') or file_name.endswith('.txt') or file_name.endswith('.tsv') or file_name.endswith('.csv'):
+dis_list = os.listdir(source_dir)
+print(dis_list)
+for file_name in dis_list:
+    if file_name.endswith('.pdb') or file_name.endswith('.txt') or file_name.endswith('.tsv') or file_name.endswith('.csv') or file_name.endswith('_conformations'):
         source_file = os.path.join(source_dir, file_name)
         dest_file = os.path.join(dest_dir, file_name)
         shutil.move(source_file, dest_file)
+        shutil.move(f"{date_time_str}_conformations", dest_file)
 
 print("\n+--------+")
 print("|FINSIHED|")

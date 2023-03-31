@@ -10,7 +10,7 @@ def get_csv(smiles):
     print("|Swiss Target Prediction Scrapper Running|")
     print("+----------------------------------------+\n")
     driver = webdriver.Chrome()
-    wait = WebDriverWait(driver, 1)
+    wait = WebDriverWait(driver, 20)
 
     driver.get("http://www.swisstargetprediction.ch/")
 
